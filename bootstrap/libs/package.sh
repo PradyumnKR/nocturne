@@ -12,24 +12,41 @@ update_package_index() {
 }
 
 install_package() {
-    local package="$1"
 
-    if [[ -z "$package" ]]; then
-        print_error "No package specified."
+    if [[ -z "${1:-}" ]]; then
+        print_error "No package name provided."
         return 1
     fi
 
-    if command_exists "$package"; then
-        print_info "$package is already installed."
+    local package="$1"
+    local binary
+
+    binary="$(resolve_package_binary "$@")"
+
+    if command_exists "$binary"; then
+        print_success "Package '$package' is already installed."
         return 0
     fi
 
-    print_info "Installing $package..."
+    print_info "Installing package '$package'..."
 
     if sudo apt-get install -y "$package"; then
-        print_success "$package installed successfully."
+        print_success "Package '$package' installed successfully."
     else
-        print_error "Failed to install $package."
+        print_error "Failed to install package '$package'."
         return 1
     fi
+}
+
+resolve_package_binary() {
+
+    if [[ -z "${1:-}" ]]; then
+        print_error "No package name provided."
+        return 1
+    fi
+
+    local package="$1"
+    local binary="${2:-$1}"
+
+    printf '%s\n' "$binary"
 }

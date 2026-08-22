@@ -30,4 +30,44 @@ else
     exit 1
 fi
 
+
+print_info "Testing package binary resolution..."
+
+if [[ "$(resolve_package_binary git)" == "git" ]]; then
+    print_success "Default binary resolution works."
+else
+    print_error "Default binary resolution failed."
+    exit 1
+fi
+
+if [[ "$(resolve_package_binary ripgrep rg)" == "rg" ]]; then
+    print_success "Custom binary resolution works."
+else
+    print_error "Custom binary resolution failed."
+    exit 1
+fi
+
+if [[ "$(resolve_package_binary ripgrep)" == "ripgrep" ]]; then
+    print_success "Fallback binary resolution works."
+else
+    print_error "Fallback binary resolution failed."
+    exit 1
+fi
+
+print_info "Testing package argument handling..."
+
+if install_package git; then
+    print_success "Default binary resolution works."
+else
+    print_error "Default binary resolution failed."
+    exit 1
+fi
+
+# if install_package ripgrep rg; then
+#     print_success "Custom binary resolution works."
+# else
+#     print_error "Custom binary resolution failed."
+#     exit 1
+# fi
+
 print_success "Package library tests passed."
