@@ -53,4 +53,14 @@ else
     exit 1
 fi
 
+# Package library
+if declare -f install_package >/dev/null; then
+    print_success "Package library loaded successfully."
+else
+    print_error "Package library failed to load."
+    exit 1
+fi
+
+
+
 print_success "All core libraries loaded successfully."
