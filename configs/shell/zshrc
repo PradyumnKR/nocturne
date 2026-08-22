@@ -1,0 +1,75 @@
+# ==========================================
+# Nocturne Studies
+# Zsh Configuration
+# ==========================================
+
+# ------------------------------------------
+# Environment
+# ------------------------------------------
+
+export EDITOR="nano"
+export VISUAL="$EDITOR"
+
+# ------------------------------------------
+# History
+# ------------------------------------------
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+
+# ------------------------------------------
+# Navigation
+# ------------------------------------------
+
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+
+# ------------------------------------------
+# Completion
+# ------------------------------------------
+
+autoload -Uz compinit
+compinit
+
+# ------------------------------------------
+# Aliases
+# ------------------------------------------
+
+alias ll='ls -lah'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+
+alias c='clear'
+
+# Git
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline --graph --decorate'
+
+# ------------------------------------------
+# FZF
+# ------------------------------------------
+
+if command -v fzf >/dev/null 2>&1; then
+    source <(fzf --zsh)
+fi
+
+# ------------------------------------------
+# Starship
+# ------------------------------------------
+
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init zsh)"
+fi
