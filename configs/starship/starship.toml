@@ -1,0 +1,38 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](#1a1423)[󰈙 NOCTURNE STUDIES](bg:#1a1423 fg:#d8c8a8)[](#1a1423) $directory $git_branch $git_status $fill $time
+$character
+"""
+
+[directory]
+style = "bold #d8c8a8"
+format = "[ $path]($style)"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+symbol = " "
+style = "bold #7d6c9e"
+format = "[$symbol$branch]($style)"
+
+[git_status]
+style = "bold #9b4d4d"
+format = '([$all_status$ahead_behind]($style))'
+
+[time]
+disabled = false
+format = "[󰥔 $time](#b89b5e)"
+time_format = "%H:%M"
+
+[character]
+success_symbol = "[➤](bold #d4af37)"
+error_symbol = "[✖](bold #9b4d4d)"
+
+[fill]
+symbol = "─"
+style = "#3a2e50"
+
+[cmd_duration]
+min_time = 500
+format = "[󰔟 $duration](#6b6b6b)"
