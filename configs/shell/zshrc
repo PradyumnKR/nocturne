@@ -63,9 +63,16 @@ alias gl='git log --oneline --graph --decorate'
 # ------------------------------------------
 
 if command -v fzf >/dev/null 2>&1; then
-    source <(fzf --zsh)
-fi
+    FZF_ZSH_DIR="/usr/share/doc/fzf/examples"
 
+    if [[ -f "$FZF_ZSH_DIR/key-bindings.zsh" ]]; then
+        source "$FZF_ZSH_DIR/key-bindings.zsh"
+    fi
+
+    if [[ -f "$FZF_ZSH_DIR/completion.zsh" ]]; then
+        source "$FZF_ZSH_DIR/completion.zsh"
+    fi
+fi
 # ------------------------------------------
 # Starship
 # ------------------------------------------
