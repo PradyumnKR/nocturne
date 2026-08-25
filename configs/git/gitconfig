@@ -1,0 +1,27 @@
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = false
+
+[push]
+    autoSetupRemote = true
+
+[fetch]
+    prune = true
+
+[core]
+    editor = vim
+
+[color]
+    ui = auto
+
+[merge]
+    conflictstyle = zdiff3
+
+[diff]
+    algorithm = histogram
+
+[rerere]
+    enabled = true
+    autoupdate = true

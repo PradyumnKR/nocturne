@@ -33,7 +33,7 @@ else
 fi
 
 # --------------------------------------------------
-# Test 3: Installer handles existing Git
+# Test 3: Git installer executes
 # --------------------------------------------------
 
 if install_git; then
@@ -44,18 +44,46 @@ else
 fi
 
 # --------------------------------------------------
-# Test 4: Verify Git still works
+# Test 4: Git configuration exists
 # --------------------------------------------------
 
-if git --version >/dev/null 2>&1; then
-    print_success "Git executable is working."
+if [[ -f "$HOME/.gitconfig" ]]; then
+    print_success "Git configuration exists."
 else
-    print_error "Git executable failed."
+    print_error "Git configuration was not installed."
     exit 1
 fi
 
 # --------------------------------------------------
-# Final result
+# Test 5: Verify configuration values
 # --------------------------------------------------
+
+if [[ "$(git config --global init.defaultBranch)" == "main" ]]; then
+    print_success "Default branch configuration is correct."
+else
+    print_error "Default branch configuration is incorrect."
+    exit 1
+fi
+
+if [[ "$(git config --global fetch.prune)" == "true" ]]; then
+    print_success "Fetch prune configuration is correct."
+else
+    print_error "Fetch prune configuration is incorrect."
+    exit 1
+fi
+
+if [[ "$(git config --global push.autoSetupRemote)" == "true" ]]; then
+    print_success "Automatic upstream configuration is correct."
+else
+    print_error "Automatic upstream configuration is incorrect."
+    exit 1
+fi
+
+if [[ "$(git config --global rerere.enabled)" == "true" ]]; then
+    print_success "Git rerere is enabled."
+else
+    print_error "Git rerere is not enabled."
+    exit 1
+fi
 
 print_success "All Git installer tests passed."
