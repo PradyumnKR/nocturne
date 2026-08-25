@@ -22,18 +22,31 @@ else
 fi
 
 # --------------------------------------------------
-# Test 2: Neovim is installed
+# Test 2: Run installer
+# --------------------------------------------------
+
+print_info "Installing Neovim for testing..."
+
+if install_neovim; then
+    print_success "Neovim installer executed successfully."
+else
+    print_error "Neovim installer failed."
+    exit 1
+fi
+
+# --------------------------------------------------
+# Test 3: Neovim is available
 # --------------------------------------------------
 
 if command_exists nvim; then
     print_success "Neovim binary detected."
 else
-    print_error "Neovim binary was not found."
+    print_error "Neovim binary was not found after installation."
     exit 1
 fi
 
 # --------------------------------------------------
-# Test 3: Neovim runs successfully
+# Test 4: Neovim executes
 # --------------------------------------------------
 
 if nvim --version >/dev/null 2>&1; then
@@ -44,26 +57,15 @@ else
 fi
 
 # --------------------------------------------------
-# Test 4: Installer executes successfully
+# Test 5: Installer is idempotent
 # --------------------------------------------------
 
-print_info "Testing Neovim installer..."
+print_info "Testing Neovim installer idempotency..."
 
 if install_neovim; then
-    print_success "Neovim installer executed successfully."
+    print_success "Neovim installer is idempotent."
 else
-    print_error "Neovim installer failed."
-    exit 1
-fi
-
-# --------------------------------------------------
-# Test 5: Verify Neovim after installation
-# --------------------------------------------------
-
-if command_exists nvim; then
-    print_success "Neovim is available after installation."
-else
-    print_error "Neovim is unavailable after installation."
+    print_error "Neovim installer failed on second execution."
     exit 1
 fi
 
