@@ -12,13 +12,14 @@ install_environment() {
     install_git
     install_python
     install_node
+    install_neovim
 
     
     install_shell
 
     
     install_starship
-
+    
     
     install_banner
 

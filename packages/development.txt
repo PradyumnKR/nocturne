@@ -1,3 +1,9 @@
+git
 python3
-python3-pip
+nodejs
+ripgrep
+fd-find
+jq
+tree
+neovim
 build-essential

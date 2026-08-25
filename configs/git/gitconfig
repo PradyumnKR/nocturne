@@ -11,7 +11,7 @@
     prune = true
 
 [core]
-    editor = vim
+    editor = nvim
 
 [color]
     ui = auto
